@@ -1,7 +1,7 @@
 package br.com.citcolab.citwebservices.model.entity;
 
-import br.com.citcolab.citwebservices.enumeration.PointUpdateEnum;
-import br.com.citcolab.citwebservices.enumeration.PointUptadeRequestEnum;
+import br.com.citcolab.citwebservices.enumeration.PointUpdateResponse;
+import br.com.citcolab.citwebservices.enumeration.PointUpdateRequestStatus;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,20 +13,21 @@ public class PointRegisterUpdate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
     private Long id;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "point_register_id")
     private Long point_register_id;
 
-    @Column(name = "justification", nullable = false)
-    private String justificacion;
+    @Column(nullable = false)
+    private String justification;
 
-    @Column(name = "point_register_update", nullable = false)
-    private PointUpdateEnum point_register_update;
+    @Enumerated(EnumType.STRING)
+    @Column( nullable = false)
+    private PointUpdateResponse point_register_update;
 
-    @Column(name = "point_register_request", nullable = false)
-    private PointUptadeRequestEnum point_register_request;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PointUpdateRequestStatus point_register_request;
 
 }

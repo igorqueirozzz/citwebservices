@@ -2,20 +2,19 @@ package br.com.citcolab.citwebservices.enumeration;
 
 import br.com.citcolab.citwebservices.enumeration.api.IEnumModel;
 
-public enum SectorEnum implements IEnumModel {
+public enum PointUpdateRequestStatus implements IEnumModel {
 
-    ADMIN(0, "ADMINISTRATIVO"),
-    MANAGER(1, "GERENCIA"),
-    IT(2, "TECNOLOGIA DA INFORMAÇÃO");
+    PENDENTE(0,"PENDENTE"),
+    VERIFICADA(1,"VERIFICADA");
 
     private String description;
+
     private Integer value;
 
-    SectorEnum( Integer value, String description) {
-        this.description = description;
+    PointUpdateRequestStatus(int value, String description) {
         this.value = value;
+        this.description = description;
     }
-
 
     @Override
     public String getDescription() {
@@ -26,4 +25,6 @@ public enum SectorEnum implements IEnumModel {
     public Integer getValue() {
         return this.value;
     }
+
+
 }

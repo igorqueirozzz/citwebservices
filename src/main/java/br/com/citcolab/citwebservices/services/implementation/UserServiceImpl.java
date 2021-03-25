@@ -1,61 +1,45 @@
 package br.com.citcolab.citwebservices.services.implementation;
 
-import br.com.citcolab.citwebservices.model.entity.User;
-import br.com.citcolab.citwebservices.model.repository.PointRegisterRepository;
+import br.com.citcolab.citwebservices.exception.AuthenticationUserExpection;
+import br.com.citcolab.citwebservices.exception.CPFException;
+import br.com.citcolab.citwebservices.model.entity.UserEntity;
 import br.com.citcolab.citwebservices.model.repository.UserRepository;
 import br.com.citcolab.citwebservices.services.UserService;
+import br.com.citcolab.citwebservices.ws.RepositoryManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-@Service
-@RequestMapping
+@Component
+@RequestMapping("/api/user")
 public class UserServiceImpl implements UserService {
+
+
+    @Autowired
+    RepositoryManagerService repositoryManagerService;
+
     @Autowired
     UserRepository userRepository;
 
     @Autowired
-    PointRegisterRepository pointRegisterRepository;
+    PasswordEncoder passwordEncoder;
 
-   /*
-   *
-   * PARA USUÁRIOS COM NIVEL DE ACESSO ADMIN
-   *
-    */
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/createUser")
-    public ResponseEntity createUser(@RequestBody User user){
-        userRepository.save(user);
-        return ResponseEntity.ok(user);
-    }
+    @PostMapping("/auth")
+    @Override
+    public UserDetails auth(UserEntity user){
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/deleteUser/{cpf}")
-    public ResponseEntity deleteUser(String cpf){
-        User user = userRepository.findByCpf(cpf).get();
-        userRepository.delete(user);
-        return ResponseEntity.ok(user);
-    }
+        CPFException.cpfValidation(userRepository.existsByCpf(user.getCpf()), "find");
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("/updateUser/{id}")
-    public ResponseEntity updateUser(@PathVariable Long id, @RequestBody User newUser){
-        return userRepository.findById(id)
-                .map(userFounded -> {
-                    newUser.setId(userFounded.getId());
-                    userRepository.save(newUser);
-                    return ResponseEntity.noContent().build();
-                }).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+        UserDetails userDetails = repositoryManagerService.authUser(user);
 
-    /**************************************************************************************/
-
-    @ResponseBody
-    @GetMapping("/getUser/{email}")
-    public User getUser(@PathVariable String email){
-        return userRepository.findByEmail(email).get();
+        boolean authPassword = passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
+        if (authPassword) {
+            return userDetails;
+        } else {
+            throw new AuthenticationUserExpection();
+        }
     }
 
 }

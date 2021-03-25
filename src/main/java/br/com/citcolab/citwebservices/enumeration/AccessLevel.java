@@ -2,18 +2,17 @@ package br.com.citcolab.citwebservices.enumeration;
 
 import br.com.citcolab.citwebservices.enumeration.api.IEnumModel;
 
-public enum SectorEnum implements IEnumModel {
+public enum AccessLevel implements IEnumModel {
+    USER(0, "USUARIO"),
+    ADMIN(1, "ADMINISTRADOR"),
+    MASTER(2, "GERENCIAL");
 
-    ADMIN(0, "ADMINISTRATIVO"),
-    MANAGER(1, "GERENCIA"),
-    IT(2, "TECNOLOGIA DA INFORMAÇÃO");
-
-    private String description;
     private Integer value;
+    private String description;
 
-    SectorEnum( Integer value, String description) {
-        this.description = description;
+    AccessLevel(Integer value, String description) {
         this.value = value;
+        this.description = description;
     }
 
 

@@ -1,6 +1,5 @@
 package br.com.citcolab.citwebservices.model.entity;
 
-import br.com.citcolab.citwebservices.enumeration.PointUpdateEnum;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,24 +7,26 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "point_register")
+@Table(name = "point_register", schema = "citwebservices")
 public class PointRegister {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
 
-    @Column(name = "register_date", nullable = false)
+    @Temporal(TemporalType.DATE)
+    @Column( nullable = false)
     private Date register_date;
 
-    @Column(name = "local_register", nullable = false)
+
+    @Column(nullable = false)
     private String local_register;
 
-    @Column(name = "register_time", nullable = false)
+    @Temporal(TemporalType.TIME)
+    @Column(nullable = false)
     private Date register_time;
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private User user_id;
+    private UserEntity user_id;
 
 }

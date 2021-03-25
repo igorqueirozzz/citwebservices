@@ -1,15 +1,17 @@
 package br.com.citcolab.citwebservices.model.repository;
 
-import br.com.citcolab.citwebservices.model.entity.User;
+import br.com.citcolab.citwebservices.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    Optional<User> findByCpf(String cpf);
+    boolean existsByEmail(String email);
 
-    Optional<User> findByEmail(String email);
+    boolean existsByCpf(String cpf);
+
+    boolean existsByEmployerId(Long employerId);
+
+    UserEntity findByCpf(String cpf);
 }
