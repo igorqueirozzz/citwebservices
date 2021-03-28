@@ -8,16 +8,16 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "PointRegisterUpdate", schema = "citwebservices")
+@Table(name = "point_register_update", schema = "citwebservices")
 public class PointRegisterUpdate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "point_register_id")
-    private Long point_register_id;
+    private PointRegister point_register_id;
 
     @Column(nullable = false)
     private String justification;

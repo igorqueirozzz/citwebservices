@@ -25,7 +25,7 @@ public class PointRegister {
     @Column(nullable = false)
     private Date register_time;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user_id;
 

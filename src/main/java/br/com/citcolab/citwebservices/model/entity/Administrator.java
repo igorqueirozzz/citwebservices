@@ -10,8 +10,9 @@ import java.sql.Blob;
 
 @Entity
 @Data
-@Table(name = "users", schema = "citwebservices")
-public class UserEntity {
+@Table(name = "admin", schema = "citwebservices")
+public class Administrator {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,18 +23,18 @@ public class UserEntity {
     @Column(length = 11, nullable = false, unique = true)
     private String cpf;
 
-    @Column(name = "user_name" ,nullable = false)
-    private String userName;
+    @Column(nullable = false)
+    private String adminName;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(length = 1, nullable = false)
     private GenderEnum gender;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "userpassword",nullable = false)
-    private String userPassword;
+    @Column( nullable = false)
+    private String adminPassword;
 
     @Column
     private String occupation;
@@ -46,10 +47,9 @@ public class UserEntity {
     private SectorEnum sector;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "access_level", nullable = false)
+    @Column(nullable = false)
     private AccessLevel accessLevel;
 
-    @Column(name = "photo_profile")
-    private String photo_profile_url;
-
+    @Column
+    private Blob photo_profile_url;
 }

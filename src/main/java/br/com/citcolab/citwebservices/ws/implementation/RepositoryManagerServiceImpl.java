@@ -7,10 +7,11 @@ import br.com.citcolab.citwebservices.model.repository.UserRepository;
 import br.com.citcolab.citwebservices.ws.RepositoryManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
-
+@Service
 public class RepositoryManagerServiceImpl implements RepositoryManagerService {
 
     @Autowired
@@ -42,7 +43,7 @@ public class RepositoryManagerServiceImpl implements RepositoryManagerService {
         UserEntity user1 = userRepository.findByCpf(user.getCpf());
         return User.builder()
                 .username(user.getEmail())
-                .password(user.getPassword())
+                .password(user.getUserPassword())
                 .build();
     }
 

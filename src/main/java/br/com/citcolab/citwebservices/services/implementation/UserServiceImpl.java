@@ -7,6 +7,7 @@ import br.com.citcolab.citwebservices.model.repository.UserRepository;
 import br.com.citcolab.citwebservices.services.UserService;
 import br.com.citcolab.citwebservices.ws.RepositoryManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -34,12 +35,14 @@ public class UserServiceImpl implements UserService {
 
         UserDetails userDetails = repositoryManagerService.authUser(user);
 
-        boolean authPassword = passwordEncoder.matches(user.getPassword(), userDetails.getPassword());
+        boolean authPassword = passwordEncoder.matches(user.getUserPassword(), userDetails.getPassword());
         if (authPassword) {
             return userDetails;
         } else {
             throw new AuthenticationUserExpection();
         }
     }
+
+
 
 }
