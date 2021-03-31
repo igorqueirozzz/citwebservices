@@ -17,39 +17,39 @@ public class Administrator {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column( nullable = false, unique = true)
+    @Column(name = "employer_id" ,nullable = false, unique = true)
     private Long employerId;
 
-    @Column(length = 11, nullable = false, unique = true)
+    @Column(name = "cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 
-    @Column(nullable = false)
-    private String adminName;
+    @Column(name = "user_name", nullable = false)
+    private String userName;
 
     @Enumerated(EnumType.STRING)
-    @Column(length = 1, nullable = false)
+    @Column(name = "gender", length = 1, nullable = false)
     private GenderEnum gender;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column( nullable = false)
-    private String adminPassword;
+    @Column(name = "user_password", nullable = false)
+    private String userPassword;
 
-    @Column
+    @Column(name = "occupation", nullable = false)
     private String occupation;
 
-    @Column
+    @Column(name = "local_office", nullable = false)
     private String local_office;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "sector")
+    @Column(name = "sector", nullable = false)
     private SectorEnum sector;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "access_level", nullable = false)
     private AccessLevel accessLevel;
 
-    @Column
-    private Blob photo_profile_url;
+    @Column(name = "photo_profile", nullable = false)
+    private String photo_profile;
 }

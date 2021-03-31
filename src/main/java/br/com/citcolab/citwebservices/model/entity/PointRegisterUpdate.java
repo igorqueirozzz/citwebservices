@@ -19,12 +19,12 @@ public class PointRegisterUpdate {
     @JoinColumn(name = "point_register_id")
     private PointRegister point_register_id;
 
-    @Column(nullable = false)
+    @Column(name = "justification", nullable = false)
     private String justification;
 
     @Enumerated(EnumType.STRING)
-    @Column( nullable = false)
-    private PointUpdateResponse point_register_update;
+    @Column(name = "register_update_response", nullable = false)
+    private PointUpdateResponse register_update_response;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

@@ -3,42 +3,48 @@ package br.com.citcolab.citwebservices.model.entity;
 import br.com.citcolab.citwebservices.enumeration.AccessLevel;
 import br.com.citcolab.citwebservices.enumeration.GenderEnum;
 import br.com.citcolab.citwebservices.enumeration.SectorEnum;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Blob;
 
 @Entity
+@Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "users", schema = "citwebservices")
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column( nullable = false, unique = true)
+    @Column(name = "employer_id", nullable = false, unique = true)
     private Long employerId;
 
-    @Column(length = 11, nullable = false, unique = true)
+    @Column(name = "cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 
     @Column(name = "user_name" ,nullable = false)
     private String userName;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "gender",nullable = false)
     private GenderEnum gender;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "userpassword",nullable = false)
+    @Column(name = "user_password",nullable = false)
     private String userPassword;
 
-    @Column
+    @Column(name = "occupation", nullable = false)
     private String occupation;
 
-    @Column
+    @Column(name = "local_office", nullable = false)
     private String local_office;
 
     @Enumerated(EnumType.STRING)
