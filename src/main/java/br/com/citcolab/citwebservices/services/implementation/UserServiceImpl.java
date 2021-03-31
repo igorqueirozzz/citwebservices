@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
 
     @PostMapping("/auth")
+    @ResponseStatus(HttpStatus.OK)
     @Override
     public UserEntity auth(@RequestBody CredentialsDTO userCredentials){
 
