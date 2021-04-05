@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface PointRegisterService {
 
-    ResponseEntity registerPoint(RegisterPointDTO registerPoint, UserEntity user);
+    ResponseEntity registerPoint(RegisterPointDTO registerPoint );
 }
