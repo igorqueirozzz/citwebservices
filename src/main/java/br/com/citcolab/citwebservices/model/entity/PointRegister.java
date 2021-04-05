@@ -1,11 +1,16 @@
 package br.com.citcolab.citwebservices.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Table(name = "point_register", schema = "citwebservices")
 public class PointRegister {
@@ -14,15 +19,15 @@ public class PointRegister {
     private Long id;
 
     @Temporal(TemporalType.DATE)
-    @Column( nullable = false)
+    @Column(name = "register_date", nullable = false)
     private Date register_date;
 
 
-    @Column(nullable = false)
-    private String local_register;
+    @Column(name = "register_local", nullable = false)
+    private String register_local;
 
     @Temporal(TemporalType.TIME)
-    @Column(nullable = false)
+    @Column(name = "register_time", nullable = false)
     private Date register_time;
 
     @ManyToOne

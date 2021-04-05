@@ -38,8 +38,8 @@ public class UserEntity {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "user_password",nullable = false)
-    private String userPassword;
+    @Column(name = "userpassword",nullable = false)
+    private String user_password;
 
     @Column(name = "occupation", nullable = false)
     private String occupation;

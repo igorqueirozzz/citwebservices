@@ -32,7 +32,7 @@ public class AdminServiceImpl implements AdminService {
 
         CPFException.cpfValidation(cpfAlreadyInUse, "save");
 
-        userEntity.setUserPassword(passwordEncoder.encode(userEntity.getUserPassword()));
+        userEntity.setUser_password(passwordEncoder.encode(userEntity.getUser_password()));
         userRepository.save(userEntity);
         return ResponseEntity.ok(userEntity);
 

@@ -1,10 +1,10 @@
 package br.com.citcolab.citwebservices.exception;
 
-public class AuthenticationUserExpection extends RuntimeException {
+public class AuthenticationUserException extends RuntimeException {
 
     private static final long serialVersionUID = -7438288681796790666L;
 
-    public AuthenticationUserExpection() {
+    public AuthenticationUserException() {
         super("Email ou Senha inválidos");
     }
 
