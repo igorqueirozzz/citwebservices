@@ -29,7 +29,7 @@ public class UserEntity {
     private String cpf;
 
     @Column(name = "user_name" ,nullable = false)
-    private String userName;
+    private String user_name;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender",nullable = false)
@@ -38,7 +38,7 @@ public class UserEntity {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "userpassword",nullable = false)
+    @Column(name = "user_password",nullable = false)
     private String user_password;
 
     @Column(name = "occupation", nullable = false)

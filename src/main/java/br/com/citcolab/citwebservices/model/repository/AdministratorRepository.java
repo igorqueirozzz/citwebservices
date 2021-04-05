@@ -4,4 +4,7 @@ import br.com.citcolab.citwebservices.model.entity.Administrator;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AdministratorRepository extends JpaRepository<Administrator, Long> {
+
+    boolean existsByCpf(String cpf);
+    Administrator findByEmail(String email);
 }

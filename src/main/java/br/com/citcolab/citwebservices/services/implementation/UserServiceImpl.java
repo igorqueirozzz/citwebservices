@@ -34,6 +34,9 @@ public class UserServiceImpl implements UserService {
     public UserEntity auth(@RequestBody CredentialsDTO userCredentials){
 
         UserEntity user = userRepository.findByEmail(userCredentials.getEmail_login());
+        if (user == null){
+            throw new AuthenticationUserException();
+        }
         boolean matchPassword = passwordEncoder.matches(userCredentials.getPassword(), user.getUser_password());
            if (matchPassword){
                return user;

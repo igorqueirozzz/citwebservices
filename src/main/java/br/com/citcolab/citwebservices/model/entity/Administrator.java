@@ -24,7 +24,7 @@ public class Administrator {
     private String cpf;
 
     @Column(name = "user_name", nullable = false)
-    private String userName;
+    private String user_name;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", length = 1, nullable = false)
@@ -34,7 +34,7 @@ public class Administrator {
     private String email;
 
     @Column(name = "user_password", nullable = false)
-    private String userPassword;
+    private String user_password;
 
     @Column(name = "occupation", nullable = false)
     private String occupation;
@@ -48,7 +48,7 @@ public class Administrator {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "access_level", nullable = false)
-    private AccessLevel accessLevel;
+    private AccessLevel access_level;
 
     @Column(name = "photo_profile", nullable = false)
     private String photo_profile;
