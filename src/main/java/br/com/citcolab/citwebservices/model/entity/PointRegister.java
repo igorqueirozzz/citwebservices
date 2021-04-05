@@ -30,6 +30,9 @@ public class PointRegister {
     @Column(name = "register_time", nullable = false)
     private Date register_time;
 
+    @Column(name = "reference", nullable = false)
+    private String reference;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user_id;

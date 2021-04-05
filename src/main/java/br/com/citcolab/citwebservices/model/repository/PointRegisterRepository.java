@@ -14,7 +14,11 @@ public interface PointRegisterRepository extends JpaRepository<PointRegister, Lo
 
     @Query(value = "SELECT * FROM citwebservices.point_register where user_id = ?", nativeQuery = true)
     List<PointRegister> findPointRegister(Long userId);
+
     @Query(value = "SELECT * FROM citwebservices.point_register WHERE register_date = ?", nativeQuery = true)
     List<PointRegister> findByRegisterDate(Date date);
+
+    @Query(value = "SELECT * FROM citwebservices.point_register WHERE user_id = ? AND reference = ?", nativeQuery = true)
+    List<PointRegister> findByReference(Long userId, String reference);
 
 }

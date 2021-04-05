@@ -17,4 +17,5 @@ public class RegisterPointDTO {
     private String user_location;
     private Date register_date;
     private Date register_time;
+    private String reference;
 }

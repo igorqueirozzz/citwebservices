@@ -38,6 +38,7 @@ public class PointRegisterServiceImpl implements PointRegisterService {
         pointRegister.setRegister_date(registerPoint.getRegister_date());
         pointRegister.setRegister_time(registerPoint.getRegister_time());
         pointRegister.setRegister_local(registerPoint.getUser_location());
+        pointRegister.setReference(registerPoint.getReference());
         pointRegister.setUser_id(user);
         RegisterPointException.checkRegisterTime(pointRegister, listRegister, listRegister.size());
         pointRegisterRepository.save(pointRegister);
