@@ -18,7 +18,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@RestController
+@RequestMapping("/api/point-controller")
 public class PointRegisterServiceImpl implements PointRegisterService {
 
     @Autowired
@@ -27,6 +28,8 @@ public class PointRegisterServiceImpl implements PointRegisterService {
     @Autowired
     UserRepository userRepository;
 
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.OK)
     @Override
     public ResponseEntity registerPoint(@RequestBody RegisterPointDTO registerPoint ) {
         UserEntity userid = new UserEntity();
@@ -34,8 +37,6 @@ public class PointRegisterServiceImpl implements PointRegisterService {
 
         RegisterPointException.checkDateTime(registerPoint.getRegister_date());
         List<PointRegister> listRegister = pointRegisterRepository.findByRegisterDate(registerPoint.getRegister_date());
-
-
         PointRegister pointRegister = new PointRegister();
         pointRegister.setRegister_date(registerPoint.getRegister_date());
         pointRegister.setRegister_time(registerPoint.getRegister_time());
@@ -44,6 +45,6 @@ public class PointRegisterServiceImpl implements PointRegisterService {
         pointRegister.setUser_id(userid);
         RegisterPointException.checkRegisterTime(pointRegister, listRegister, listRegister.size());
         pointRegisterRepository.save(pointRegister);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.ok("Registrado");
     }
 }

@@ -2,6 +2,7 @@ package br.com.citcolab.citwebservices.services;
 import br.com.citcolab.citwebservices.model.dto.CredentialsDTO;
 import br.com.citcolab.citwebservices.model.dto.RegisterPointDTO;
 import br.com.citcolab.citwebservices.model.entity.UserEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +14,6 @@ import java.util.Date;
 public interface UserService {
     UserEntity auth(CredentialsDTO credentialsDTO);
     ResponseEntity updatePhoto(Long userid, String photoUrl);
-    ResponseEntity registerPoint(RegisterPointDTO registerPoint);
+    void registerPoint(RegisterPointDTO registerPoint);
 
 }

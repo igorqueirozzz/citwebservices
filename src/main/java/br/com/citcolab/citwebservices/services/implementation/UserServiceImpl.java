@@ -59,8 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @PostMapping("/register-point")
     @Override
-    public ResponseEntity registerPoint(@RequestBody RegisterPointDTO registerPoint) {
+    public void registerPoint(@RequestBody RegisterPointDTO registerPoint) {
         pointRegisterService.registerPoint(registerPoint);
-        return ResponseEntity.ok().build();
     }
 }
