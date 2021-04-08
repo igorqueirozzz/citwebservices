@@ -36,4 +36,10 @@ public class RegisterPointException extends RuntimeException {
 
     }
 
+    public static void notFoundRegisters(List<PointRegister> registers){
+        if (registers.isEmpty()){
+            throw new RegisterPointException("Não foram encontrados registros para o mês de referencia.");
+        }
+    }
+
 }
