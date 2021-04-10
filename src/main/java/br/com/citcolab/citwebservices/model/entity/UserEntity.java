@@ -53,7 +53,7 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "access_level", nullable = false)
-    private AccessLevel accessLevel;
+    private AccessLevel access_level;
 
     @Column(name = "photo_profile")
     private String photo_profile_url;

@@ -1,5 +1,8 @@
 package br.com.citcolab.citwebservices.model.entity;
 
+import br.com.citcolab.citwebservices.helper.PointSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +16,8 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Table(name = "point_register", schema = "citwebservices")
+@JsonSerialize(using = PointSerializer.class)
+@JsonDeserialize
 public class PointRegister {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

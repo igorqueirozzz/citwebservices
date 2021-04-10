@@ -8,6 +8,8 @@ import br.com.citcolab.citwebservices.model.entity.UserEntity;
 import br.com.citcolab.citwebservices.model.repository.PointRegisterRepository;
 import br.com.citcolab.citwebservices.model.repository.UserRepository;
 import br.com.citcolab.citwebservices.services.PointRegisterService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -39,11 +41,11 @@ public class PointRegisterServiceImpl implements PointRegisterService {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.OK)
     @Override
-    public RegisterPointDTO registerPoint(@RequestBody RegisterPointDTO registerPoint ) {
+    public ResponseEntity registerPoint(@RequestBody RegisterPointDTO registerPoint ) {
         UserEntity userid = new UserEntity();
         userid.setId(registerPoint.getUser_id());
 
-        RegisterPointException.checkDateTime(registerPoint.getRegister_date());
+//        RegisterPointException.checkDateTime(registerPoint.getRegister_date());
         List<PointRegister> listRegister = pointRegisterRepository.findByRegisterDate(registerPoint.getRegister_date());
         PointRegister pointRegister = new PointRegister();
         pointRegister.setRegister_date(registerPoint.getRegister_date());
@@ -53,17 +55,18 @@ public class PointRegisterServiceImpl implements PointRegisterService {
         pointRegister.setUser_id(userid);
         RegisterPointException.checkRegisterTime(pointRegister, listRegister, listRegister.size());
         pointRegisterRepository.save(pointRegister);
-        return registerPoint;
+        return ResponseEntity.ok("TESTE");
     }
 
     @PostMapping("/get-registers-month")
     @Override
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity findByReference(@RequestBody  GetRegisterMonthListDTO reference){
+    public ResponseEntity findByReference(@RequestBody  GetRegisterMonthListDTO reference) throws JsonProcessingException {
         List<PointRegister> registers = pointRegisterRepository.findByReference(reference.getUserId(), reference.getReference());
         RegisterPointException.notFoundRegisters(registers);
-        return ResponseEntity.ok(registers);
+        String serialized = new ObjectMapper().writeValueAsString(registers);
+        return ResponseEntity.ok(serialized);
     }
 
     @GetMapping("/teste")

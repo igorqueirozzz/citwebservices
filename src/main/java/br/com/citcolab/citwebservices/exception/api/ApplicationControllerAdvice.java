@@ -5,6 +5,7 @@ import br.com.citcolab.citwebservices.exception.CPFException;
 import br.com.citcolab.citwebservices.exception.RegisterPointException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -27,6 +28,7 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler(RegisterPointException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
     public ApiError handlerApiRegisterException(RegisterPointException exception){
         String errorMessage = exception.getMessage();
         return new ApiError(errorMessage);
