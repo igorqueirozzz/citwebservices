@@ -3,6 +3,9 @@ package br.com.citcolab.citwebservices.model.entity;
 import br.com.citcolab.citwebservices.enumeration.AccessLevel;
 import br.com.citcolab.citwebservices.enumeration.GenderEnum;
 import br.com.citcolab.citwebservices.enumeration.SectorEnum;
+import br.com.citcolab.citwebservices.helper.UserSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +20,8 @@ import java.sql.Blob;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users", schema = "citwebservices")
+@JsonSerialize(using = UserSerializer.class)
+@JsonDeserialize
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

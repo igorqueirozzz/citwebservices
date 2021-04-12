@@ -69,12 +69,6 @@ public class PointRegisterServiceImpl implements PointRegisterService {
         return ResponseEntity.ok(serialized);
     }
 
-    @GetMapping("/teste")
-    public  ResponseEntity teste(){
-        return ResponseEntity.ok("Julho comedor de traveco");
-    }
-
-
 }
 
 

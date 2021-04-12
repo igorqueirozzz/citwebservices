@@ -17,7 +17,6 @@ import java.util.Date;
 @Data
 @Table(name = "point_register", schema = "citwebservices")
 @JsonSerialize(using = PointSerializer.class)
-@JsonDeserialize
 public class PointRegister {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -15,8 +15,8 @@ public class ApplicationControllerAdvice {
     @ExceptionHandler(AuthenticationUserException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handlerApiAuthException(AuthenticationUserException exception){
-        String errorMessage = exception.getMessage();
-        return new ApiError(errorMessage);
+
+        return new ApiError(exception.getMessage());
     }
 
     @ExceptionHandler(CPFException.class)
@@ -30,8 +30,8 @@ public class ApplicationControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ApiError handlerApiRegisterException(RegisterPointException exception){
-        String errorMessage = exception.getMessage();
-        return new ApiError(errorMessage);
+
+        return new ApiError(exception.getMessage());
     }
 
 }

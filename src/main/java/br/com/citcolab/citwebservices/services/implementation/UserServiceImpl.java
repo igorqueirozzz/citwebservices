@@ -7,12 +7,20 @@ import br.com.citcolab.citwebservices.model.entity.UserEntity;
 import br.com.citcolab.citwebservices.model.repository.UserRepository;
 import br.com.citcolab.citwebservices.services.PointRegisterService;
 import br.com.citcolab.citwebservices.services.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -29,17 +37,21 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
 
     @PostMapping("/auth")
-    @ResponseStatus(HttpStatus.OK)
     @Override
-    public UserEntity auth(@RequestBody CredentialsDTO userCredentials){
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseEntity auth(@RequestBody CredentialsDTO userCredentials) throws JsonProcessingException {
 
         UserEntity user = userRepository.findByEmail(userCredentials.getEmail_login());
+        List<UserEntity> userArray = new ArrayList<>();
+        userArray.add(user);
         if (user == null){
             throw new AuthenticationUserException();
         }
         boolean matchPassword = passwordEncoder.matches(userCredentials.getPassword(), user.getUser_password());
            if (matchPassword){
-               return user;
+               String serialized = new ObjectMapper().writeValueAsString(userArray);
+               return ResponseEntity.ok(serialized);
            }else {
                throw new AuthenticationUserException();
            }
@@ -47,6 +59,8 @@ public class UserServiceImpl implements UserService {
 
     @PostMapping("/update")
     @Override
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity updatePhoto(@RequestParam Long userid,@RequestParam String photoUrl) {
         userRepository.findById(userid).map(user ->{
             user.setPhoto_profile_url(photoUrl);
