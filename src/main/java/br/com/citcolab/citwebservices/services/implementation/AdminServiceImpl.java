@@ -3,11 +3,13 @@ package br.com.citcolab.citwebservices.services.implementation;
 import br.com.citcolab.citwebservices.exception.AuthenticationUserException;
 import br.com.citcolab.citwebservices.exception.CPFException;
 import br.com.citcolab.citwebservices.model.dto.CredentialsDTO;
+import br.com.citcolab.citwebservices.model.dto.RegisterPointDTO;
 import br.com.citcolab.citwebservices.model.entity.Administrator;
 import br.com.citcolab.citwebservices.model.entity.UserEntity;
 import br.com.citcolab.citwebservices.model.repository.AdministratorRepository;
 import br.com.citcolab.citwebservices.model.repository.UserRepository;
 import br.com.citcolab.citwebservices.services.AdminService;
+import br.com.citcolab.citwebservices.services.PointRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    PointRegisterService pointRegisterService;
 
     @PostMapping("/createUser")
     @ResponseStatus(HttpStatus.CREATED)
@@ -70,5 +75,11 @@ public class AdminServiceImpl implements AdminService {
         }else {
             throw new AuthenticationUserException();
         }
+    }
+
+    @PostMapping("/register-point")
+    @Override
+    public void registerPoint(@RequestBody RegisterPointDTO registerPoint) {
+        pointRegisterService.registerPoint(registerPoint);
     }
 }

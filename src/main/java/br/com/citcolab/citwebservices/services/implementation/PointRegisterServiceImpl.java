@@ -55,7 +55,7 @@ public class PointRegisterServiceImpl implements PointRegisterService {
         pointRegister.setUser_id(userid);
         RegisterPointException.checkRegisterTime(pointRegister, listRegister, listRegister.size());
         pointRegisterRepository.save(pointRegister);
-        return ResponseEntity.ok("TESTE");
+        return ResponseEntity.ok(pointRegister);
     }
 
     @PostMapping("/get-registers-month")

@@ -50,6 +50,12 @@ public class Administrator {
     @Column(name = "access_level", nullable = false)
     private AccessLevel access_level;
 
+    @Column(name = "phone_number")
+    private String phone_number;
+
+    @Column(name = "telephone_number")
+    private String telephone_number;
+
     @Column(name = "photo_profile", nullable = false)
     private String photo_profile;
 }

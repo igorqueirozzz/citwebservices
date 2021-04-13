@@ -3,6 +3,7 @@ package br.com.citcolab.citwebservices.services.implementation;
 import br.com.citcolab.citwebservices.exception.AuthenticationUserException;
 import br.com.citcolab.citwebservices.model.dto.CredentialsDTO;
 import br.com.citcolab.citwebservices.model.dto.RegisterPointDTO;
+import br.com.citcolab.citwebservices.model.dto.UpdatePhotoDTO;
 import br.com.citcolab.citwebservices.model.entity.UserEntity;
 import br.com.citcolab.citwebservices.model.repository.UserRepository;
 import br.com.citcolab.citwebservices.services.PointRegisterService;
@@ -57,18 +58,18 @@ public class UserServiceImpl implements UserService {
            }
     }
 
-    @PostMapping("/update")
+    @PostMapping("/update-photo")
     @Override
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity updatePhoto(@RequestParam Long userid,@RequestParam String photoUrl) {
-        userRepository.findById(userid).map(user ->{
-            user.setPhoto_profile_url(photoUrl);
+    public ResponseEntity updatePhoto(@RequestBody UpdatePhotoDTO updatePhotoDTO) {
+        userRepository.findById(updatePhotoDTO.getUserid()).map(user ->{
+            user.setPhoto_profile_url(updatePhotoDTO.getPhotoUrl());
             userRepository.save(user);
             return user;
         }).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Foto atualizada com sucesso");
     }
 
     @PostMapping("/register-point")

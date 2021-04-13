@@ -1,6 +1,7 @@
 package br.com.citcolab.citwebservices.services;
 import br.com.citcolab.citwebservices.model.dto.CredentialsDTO;
 import br.com.citcolab.citwebservices.model.dto.RegisterPointDTO;
+import br.com.citcolab.citwebservices.model.dto.UpdatePhotoDTO;
 import br.com.citcolab.citwebservices.model.entity.UserEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.Date;
 @Service
 public interface UserService {
     ResponseEntity auth(CredentialsDTO credentialsDTO) throws JsonProcessingException;
-    ResponseEntity updatePhoto(Long userid, String photoUrl);
+    ResponseEntity updatePhoto(UpdatePhotoDTO updatePhotoDTO);
     void registerPoint(RegisterPointDTO registerPoint);
 
 }
